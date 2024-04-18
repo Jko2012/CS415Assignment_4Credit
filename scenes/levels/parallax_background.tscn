@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqqp8rq4mi56q"]
+
+[ext_resource type="Texture2D" uid="uid://be6oati4nwklg" path="res://graphics/parallax_field.png" id="1_8mppe"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_d26v6"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+scroll_base_offset = Vector2(0, -300)
+scroll_base_scale = Vector2(1, 0.1)
+
+[node name="Background" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(1, 0)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+modulate = Color(0.121569, 0.196078, 0.247059, 1)
+scale = Vector2(4, 4)
+texture = SubResource("CanvasTexture_d26v6")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 320, 180)
+
+[node name="BlueSky" type="ParallaxLayer" parent="."]
+texture_filter = 1
+motion_scale = Vector2(0.4, 0.1)
+motion_offset = Vector2(0, -250)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BlueSky"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_8mppe")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 320, 180)
+
+[node name="Clouds" type="ParallaxLayer" parent="."]
+texture_filter = 1
+motion_scale = Vector2(0.6, 0.15)
+motion_offset = Vector2(0, -200)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_8mppe")
+centered = false
+region_enabled = true
+region_rect = Rect2(320, 0, 320, 180)
+
+[node name="FarMountains" type="ParallaxLayer" parent="."]
+texture_filter = 1
+motion_scale = Vector2(0.8, 0.2)
+motion_offset = Vector2(0, -140)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="FarMountains"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_8mppe")
+centered = false
+region_enabled = true
+region_rect = Rect2(640, 0, 320, 180)
+
+[node name="NearMountains" type="ParallaxLayer" parent="."]
+texture_filter = 1
+motion_scale = Vector2(0.9, 0.4)
+motion_offset = Vector2(0, -57)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="NearMountains"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_8mppe")
+centered = false
+region_enabled = true
+region_rect = Rect2(960, 0, 320, 180)
+
+[node name="NearestHills" type="ParallaxLayer" parent="."]
+texture_filter = 1
+motion_scale = Vector2(1, 0.5)
+motion_offset = Vector2(0, 50)
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="NearestHills"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_8mppe")
+centered = false
+region_enabled = true
+region_rect = Rect2(1280, 0, 320, 180)

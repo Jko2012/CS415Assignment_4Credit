@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://duwq0e16i5j0e"]
+
+[ext_resource type="PackedScene" uid="uid://dghe8uhvjgh8n" path="res://scenes/levels/level.tscn" id="1_w5wd0"]
+[ext_resource type="PackedScene" uid="uid://kq8isxdblnkv" path="res://scenes/player/player.tscn" id="2_dgeg3"]
+
+[node name="GameWorld" type="Node2D"]
+
+[node name="Level" parent="." instance=ExtResource("1_w5wd0")]
+
+[node name="Player1" parent="." instance=ExtResource("2_dgeg3")]
+position = Vector2(462, 450)
+scale = Vector2(0.5, 0.5)
+
+[node name="Camera1" type="Camera2D" parent="Player1"]
+visible = false
+enabled = false
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_top_margin = 0.0
+drag_right_margin = 0.3
+drag_bottom_margin = 0.6
+
+[node name="Player2" parent="." instance=ExtResource("2_dgeg3")]
+position = Vector2(814, 446)
+scale = Vector2(0.5, 0.5)
+player_id = 2
+
+[node name="Camera2" type="Camera2D" parent="Player2"]
+visible = false
+enabled = false
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_right_margin = 0.3
