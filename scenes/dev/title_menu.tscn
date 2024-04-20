@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://bns8fds7g7dbp"]
+
+[ext_resource type="FontFile" uid="uid://cv30cys1gopik" path="res://graphics/Monocraft.ttf" id="1_dlck0"]
+[ext_resource type="Script" path="res://scenes/dev/1PlayerStart.gd" id="2_y2dgd"]
+
+[sub_resource type="Theme" id="Theme_mmill"]
+default_font = ExtResource("1_dlck0")
+
+[node name="TitleMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0.207843, 0.207843, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 90.0
+offset_right = 838.0
+offset_bottom = 228.0
+theme_override_colors/font_color = Color(0.823529, 0.388235, 0.803922, 1)
+theme_override_fonts/font = ExtResource("1_dlck0")
+theme_override_font_sizes/font_size = 80
+text = "Game"
+horizontal_alignment = 1
+
+[node name="1PlayerStart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 307.0
+offset_right = 610.0
+offset_bottom = 348.0
+theme = SubResource("Theme_mmill")
+text = "Play"
+script = ExtResource("2_y2dgd")
+
+[connection signal="pressed" from="1PlayerStart" to="1PlayerStart" method="_on_pressed"]

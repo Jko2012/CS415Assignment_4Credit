@@ -4,6 +4,7 @@ extends Control
 @export var split_line_thickness:float = 3.0
 @export var split_line_color:Color = Color.BLACK
 @export var adaptive_split_line_thickness:bool = true
+@export var single_player_mode:bool = true
 
 @onready var player1 = $ViewportContainer/Viewport1/GameWorld/Player1
 @onready var player2 = $ViewportContainer/Viewport1/GameWorld/Player2
@@ -12,6 +13,7 @@ extends Control
 @onready var view = $View2P
 @onready var camera1 = $ViewportContainer/Viewport1/Camera2D
 @onready var camera2 = $ViewportContainer2/Viewport2/Camera2D
+@onready var camera0 = $ViewportContainer/Viewport1/GameWorld/Player1/Camera1
 
 func _ready():
 	viewport2.world_2d = viewport1.world_2d
@@ -21,11 +23,25 @@ func _ready():
 
 	view.material.set_shader_parameter("viewport1", viewport1.get_texture())
 	view.material.set_shader_parameter("viewport2", viewport2.get_texture())
+	
+	if (single_player_mode):
+		camera1.enabled = false
+		camera2.enabled = false
+		camera0.enabled = true
+	
+
+func _process(_delta):
+	if Input.is_action_just_pressed("player2_input"):
+		single_player_mode = false
+		camera1.enabled = true
+		camera2.enabled = true
+		camera0.enabled = false
 
 
 func _physics_process(_delta):
-	_move_cameras()
-	_update_splitscreen()
+	if (!single_player_mode):
+		_move_cameras()
+		_update_splitscreen()
 
 func _move_cameras():
 	var position_difference = _compute_position_difference_in_world()

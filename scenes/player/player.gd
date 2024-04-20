@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-var SPEED = 500
-var JUMPFORCE = -1000
-var GRAVITY = 40
+var speed = 500
+var jumpforce = -1000
+var gravity = 40
 
 @export_range(1, 2) var player_id: int = 1
 @export var flight: bool = false
@@ -23,20 +23,20 @@ func _process(_delta):
 	
 	if (!flight):
 		if Input.is_action_pressed(move_right):
-			velocity.x = SPEED
+			velocity.x = speed
 		if Input.is_action_pressed(move_left):
-			velocity.x = -SPEED
+			velocity.x = -speed
 		if Input.is_action_just_pressed(move_up) and is_on_floor():
-			velocity.y = JUMPFORCE
-		velocity.y += GRAVITY
+			velocity.y = jumpforce
+		velocity.y += gravity
 	else:
 		if Input.is_action_just_pressed("scroll_up"):
-			SPEED += 50
+			speed += 50
 		if Input.is_action_just_pressed("scroll_down"):
-			SPEED -= 50
+			speed -= 50
 		
 		var direction = Input.get_vector(move_left, move_right, move_up, move_down)
-		velocity = direction * SPEED
+		velocity = direction * speed
 		
 	move_and_slide()
 	velocity.x = lerp(velocity.x, 0.0, 0.3)
