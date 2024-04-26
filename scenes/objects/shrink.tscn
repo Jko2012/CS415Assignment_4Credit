@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://b1dih1ya42b7w"]
+[gd_scene load_steps=2 format=3 uid="uid://b1dih1ya42b7w"]
 
-[node name="Shrink" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://cmbn6mdqbw0jj" path="res://graphics/eggcool.png" id="1_lfs8l"]
+
+[node name="Shrink" type="Area2D"]
+collision_layer = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+texture = ExtResource("1_lfs8l")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+build_mode = 1
+polygon = PackedVector2Array(-14, 52, 0, 55, 12, 53, 27, 42, 38, 22, 39, 1, 30, -31, 13, -51, 0, -56, -18, -48, -33, -26, -39, 1, -37, 22, -27, 42)
