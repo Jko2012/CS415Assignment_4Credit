@@ -14,9 +14,10 @@ script = ExtResource("1_ok7t2")
 
 [node name="Player1" parent="." instance=ExtResource("2_dgeg3")]
 modulate = Color(0, 0.784314, 0.72549, 1)
-position = Vector2(464, 450)
+position = Vector2(2634, 513)
 
 [node name="Camera1" type="Camera2D" parent="Player1"]
+visible = false
 enabled = false
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -29,18 +30,18 @@ editor_draw_drag_margin = true
 
 [node name="Player2" parent="." instance=ExtResource("2_dgeg3")]
 modulate = Color(1, 0.466667, 0.729412, 1)
-position = Vector2(814, 446)
+position = Vector2(902, -224)
 player_id = 2
 
 [node name="Shrink_PU" parent="." instance=ExtResource("3_4l35q")]
 position = Vector2(-1920, 234)
 
 [node name="Enemy" parent="." instance=ExtResource("5_evfj7")]
-position = Vector2(-343, 378)
+position = Vector2(-325, -310)
 scale = Vector2(3.5, 3.5)
 
 [node name="Jump_PU" parent="." instance=ExtResource("6_aj8ix")]
-position = Vector2(4131, 2685)
+position = Vector2(4134, 3826)
 
 [connection signal="body_entered" from="Shrink_PU" to="." method="_on_shrink_body_entered"]
 [connection signal="body_entered" from="Jump_PU" to="." method="_on_jump_pu_body_entered"]

@@ -28,7 +28,6 @@ func _ready():
 		camera1.enabled = false
 		camera2.enabled = false
 		camera0.enabled = true
-	
 
 func _process(_delta):
 	if Input.is_action_just_pressed("player2_input"):
@@ -79,6 +78,8 @@ func _update_splitscreen():
 	
 
 func _get_split_state():
+	if (single_player_mode):
+		return false
 	var position_difference = _compute_position_difference_in_world()
 	var separation_distance = position_difference.length()
 	return separation_distance > max_separation
