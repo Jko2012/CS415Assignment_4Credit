@@ -22,6 +22,7 @@ func lose_health(player, player_id):
 
 func player_death(player, player_id):
 	player_health[player_id - 1] = max_health
+	player.death.play()
 	player.respawn()
 
 func increase_health_max():

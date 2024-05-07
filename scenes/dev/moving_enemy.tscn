@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://chqjwyeagq43q"]
+
+[ext_resource type="PackedScene" uid="uid://bwoemufj1qtu" path="res://scenes/objects/moving_platform.tscn" id="1_kjl5m"]
+[ext_resource type="Texture2D" uid="uid://cb6qdrp0rti1p" path="res://assets/sprites/slime_purple.png" id="2_uws5r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eakho"]
+atlas = ExtResource("2_uws5r")
+region = Rect2(5, 35, 19, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6rrb"]
+atlas = ExtResource("2_uws5r")
+region = Rect2(29, 35, 19, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkdhm"]
+atlas = ExtResource("2_uws5r")
+region = Rect2(29, 59, 19, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tsa7i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eakho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6rrb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkdhm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cao8t"]
+resource_local_to_scene = true
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_er0i5"]
+size = Vector2(14, 13)
+
+[node name="MovingEnemy" instance=ExtResource("1_kjl5m")]
+
+[node name="PathFollow2D" parent="." index="0"]
+rotates = true
+
+[node name="AnimatableBody2D" parent="." index="1"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatableBody2D" index="0"]
+position = Vector2(0, -3)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_tsa7i")
+frame_progress = 0.367641
+
+[node name="TileMap" parent="AnimatableBody2D" index="1"]
+layer_0/tile_data = PackedInt32Array()
+
+[node name="CollisionShape2D" parent="AnimatableBody2D" index="2"]
+shape = SubResource("RectangleShape2D_cao8t")
+
+[node name="Area2D" type="Area2D" parent="AnimatableBody2D" index="3"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D/Area2D" index="0"]
+position = Vector2(-5, -3)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_er0i5")

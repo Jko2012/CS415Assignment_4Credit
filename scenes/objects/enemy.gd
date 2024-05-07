@@ -1,4 +1,4 @@
-@tool
+#@tool
 extends CharacterBody2D
 
 const MAX_SPEED = 100

@@ -1,7 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://kq8isxdblnkv"]
+[gd_scene load_steps=14 format=3 uid="uid://kq8isxdblnkv"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_m2vl1"]
 [ext_resource type="Texture2D" uid="uid://b7ap1uhp8rvs" path="res://assets/player.png" id="2_nckqy"]
+[ext_resource type="AudioStream" uid="uid://brjbnpj5akrgg" path="res://assets/sounds/hurt.wav" id="3_rma8o"]
+[ext_resource type="AudioStream" uid="uid://tn4gglqs0pcn" path="res://assets/sounds/jump.wav" id="4_n1ros"]
+[ext_resource type="AudioStream" uid="uid://cew1spw842qwm" path="res://assets/sounds/power_up.wav" id="5_c66ea"]
+[ext_resource type="AudioStream" uid="uid://b5jp7nfynjfxi" path="res://assets/sounds/explosion.wav" id="6_podak"]
+[ext_resource type="AudioStream" uid="uid://dh634w8mrxa7v" path="res://assets/sounds/shrink.wav" id="7_v2xw1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbe6o"]
 size = Vector2(15, 15)
@@ -75,6 +80,26 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Health_Collision"]
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_cw12d")
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rma8o")
+volume_db = -10.0
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_n1ros")
+volume_db = -10.0
+
+[node name="PowerUpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_c66ea")
+volume_db = -10.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_podak")
+volume_db = -10.0
+
+[node name="ShrinkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_v2xw1")
+volume_db = -10.0
 
 [connection signal="area_entered" from="InteractionHitbox" to="." method="_on_enemy_hitbox_area_entered"]
 [connection signal="timeout" from="InteractionHitbox/StunTimer" to="." method="_on_stun_timer_timeout"]

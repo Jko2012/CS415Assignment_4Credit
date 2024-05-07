@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://duwq0e16i5j0e"]
+[gd_scene load_steps=9 format=3 uid="uid://duwq0e16i5j0e"]
 
 [ext_resource type="Script" path="res://scenes/dev/game_world.gd" id="1_ok7t2"]
 [ext_resource type="PackedScene" uid="uid://dghe8uhvjgh8n" path="res://scenes/levels/level.tscn" id="1_w5wd0"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b1dih1ya42b7w" path="res://scenes/objects/shrink.tscn" id="3_4l35q"]
 [ext_resource type="PackedScene" uid="uid://b2jxb4rplf672" path="res://scenes/dev/health_increase.tscn" id="6_6r3m4"]
 [ext_resource type="PackedScene" uid="uid://kthq7cgi4c7" path="res://scenes/objects/jump_pu.tscn" id="6_aj8ix"]
+[ext_resource type="FontFile" uid="uid://cv30cys1gopik" path="res://assets/Monocraft.ttf" id="7_d3ejn"]
+
+[sub_resource type="Theme" id="Theme_i3hmv"]
+default_font = ExtResource("7_d3ejn")
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("1_ok7t2")
@@ -15,7 +19,7 @@ metadata/_edit_lock_ = true
 
 [node name="Player1" parent="." instance=ExtResource("2_dgeg3")]
 modulate = Color(0, 0.784314, 0.72549, 1)
-position = Vector2(366, -98)
+position = Vector2(425, -90.0001)
 can_jump = true
 can_shrink = true
 
@@ -37,14 +41,12 @@ editor_draw_drag_margin = true
 modulate = Color(1, 0.466667, 0.729412, 1)
 position = Vector2(567, -95.9999)
 player_id = 2
-can_jump = true
-can_shrink = true
 
 [node name="Shrink_PU" parent="." instance=ExtResource("3_4l35q")]
-position = Vector2(-3109, -3554)
+position = Vector2(-4449, -3442)
 
 [node name="Jump_PU" parent="." instance=ExtResource("6_aj8ix")]
-position = Vector2(4158, 3855)
+position = Vector2(3600, 3374)
 scale = Vector2(2, 2)
 
 [node name="HealthIncrease1" parent="." instance=ExtResource("6_6r3m4")]
@@ -55,6 +57,32 @@ position = Vector2(-1973, 3774)
 
 [node name="HealthIncrease2" parent="." instance=ExtResource("6_6r3m4")]
 position = Vector2(4928, -401)
+
+[node name="HealthIncrease3" parent="." instance=ExtResource("6_6r3m4")]
+position = Vector2(-2817, 321)
+
+[node name="HealthIncrease4" parent="." instance=ExtResource("6_6r3m4")]
+position = Vector2(-4017, -656)
+
+[node name="HealthIncrease5" parent="." instance=ExtResource("6_6r3m4")]
+position = Vector2(-4338, 3255)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 4412.0
+offset_top = -416.0
+offset_right = 4492.0
+offset_bottom = -393.0
+theme = SubResource("Theme_i3hmv")
+text = "YOU WIN!!
+Did you find all 6 Health Upgrades?"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 379.0
+offset_top = -204.0
+offset_right = 662.0
+offset_bottom = -155.0
+text = "Player 1: Use A and D to Move!
+Player 2: Use Right and Left to Move!"
 
 [connection signal="body_entered" from="Shrink_PU" to="." method="_on_shrink_body_entered"]
 [connection signal="body_entered" from="Jump_PU" to="." method="_on_jump_pu_body_entered"]

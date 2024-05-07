@@ -27,6 +27,9 @@ var can_grow = false
 var facing = 0
 var spawnpoint = Vector2(400, -80)
 
+@onready var death = $DeathSound
+@onready var power_up = $PowerUpSound
+
 func _ready():
 	speed = BASE_SPEED
 	jumpforce = BASE_JUMP
@@ -67,11 +70,14 @@ func movement():
 		velocity.x = -speed
 	if Input.is_action_just_pressed(move_up) and is_on_floor() and can_jump:
 		velocity.y = jumpforce
+		$JumpSound.play()
 	if Input.is_action_just_pressed(move_down) and can_shrink:
 		if is_shrunk:
 			grow_player()
+			$ShrinkSound.play()
 		else:
 			shrink_player()
+			$ShrinkSound.play()
 	
 
 func respawn():
@@ -102,6 +108,7 @@ func collect_jump():
 func _on_enemy_hitbox_area_entered(_area):
 	can_move = false
 	Global.lose_health(self, player_id)
+	$HurtSound.play()
 	friction = 0.1
 	velocity.x = facing*speed*-2
 	velocity.y = -500
