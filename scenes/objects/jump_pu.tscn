@@ -1,17 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://kthq7cgi4c7"]
 
-[ext_resource type="Texture2D" uid="uid://7s205ntlgkcu" path="res://graphics/icon.svg" id="1_fax5d"]
+[ext_resource type="Texture2D" uid="uid://bbnotqlx5vwx0" path="res://assets/sprites/jump.png" id="1_4450o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1o80s"]
-size = Vector2(118, 115)
+size = Vector2(32, 32)
 
 [node name="Jump_PU" type="Area2D"]
 collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_fax5d")
+texture = ExtResource("1_4450o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(1, -1.5)
 shape = SubResource("RectangleShape2D_1o80s")

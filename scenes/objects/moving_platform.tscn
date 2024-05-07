@@ -1,27 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwoemufj1qtu"]
+[gd_scene load_steps=10 format=3 uid="uid://bwoemufj1qtu"]
 
 [ext_resource type="Script" path="res://scenes/objects/moving_platform.gd" id="1_jkcv1"]
-[ext_resource type="TileSet" uid="uid://gv6xi4qt5pw4" path="res://graphics/level_tiles/ForegroundTileset.tres" id="2_8da6w"]
+[ext_resource type="TileSet" uid="uid://gv6xi4qt5pw4" path="res://assets/level_tiles/ForegroundTileset.tres" id="2_8da6w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4sye"]
-size = Vector2(40, 16)
-
-[sub_resource type="Animation" id="Animation_xji0o"]
-resource_name = "move"
-length = 2.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(-2, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
+resource_local_to_scene = true
+size = Vector2(32, 16)
 
 [sub_resource type="Animation" id="Animation_ytjrb"]
 length = 0.001
@@ -38,37 +22,113 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_xji0o"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_yhdem"]
+resource_name = "move_slow"
+length = 4.1
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 4.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_w5eg4"]
+resource_name = "move_slow_once"
+length = 4.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 4.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_mkj36"]
+resource_name = "move_stop"
+length = 2.1
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 2.05),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2dcgd"]
 _data = {
 "RESET": SubResource("Animation_ytjrb"),
-"move": SubResource("Animation_xji0o")
+"move": SubResource("Animation_xji0o"),
+"move_slow": SubResource("Animation_yhdem"),
+"move_slow_once": SubResource("Animation_w5eg4"),
+"move_stop": SubResource("Animation_mkj36")
 }
 
 [node name="MovingPlatform" type="Path2D"]
 script = ExtResource("1_jkcv1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(0, 3)
 rotates = false
+metadata/_edit_lock_ = true
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")
+metadata/_edit_lock_ = true
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(0, 3)
+collision_layer = 34
+metadata/_edit_lock_ = true
 
 [node name="TileMap" type="TileMap" parent="AnimatableBody2D"]
+z_index = -2
 texture_filter = 1
-position = Vector2(14, 0)
 scale = Vector2(3.5, 3.5)
 tile_set = ExtResource("2_8da6w")
 format = 2
 layer_0/tile_data = PackedInt32Array(1, 851968, 12, -65535, 851968, 8, 0, 655360, 12, -65536, 786432, 8, 65535, 655360, 12, -1, 655360, 8, 65534, 589824, 12, -2, 589824, 8)
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 visible = false
-position = Vector2(14, 0)
 scale = Vector2(3.5, 3.5)
 shape = SubResource("RectangleShape2D_d4sye")
-one_way_collision = true
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

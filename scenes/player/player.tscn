@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://kq8isxdblnkv"]
+[gd_scene load_steps=9 format=3 uid="uid://kq8isxdblnkv"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_m2vl1"]
-[ext_resource type="Texture2D" uid="uid://b7ap1uhp8rvs" path="res://graphics/player.png" id="2_nckqy"]
+[ext_resource type="Texture2D" uid="uid://b7ap1uhp8rvs" path="res://assets/player.png" id="2_nckqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbe6o"]
 size = Vector2(15, 15)
@@ -9,9 +9,21 @@ size = Vector2(15, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2h0nh"]
 size = Vector2(15, 15)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ds2y5"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prj83"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mscpy"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cw12d"]
+size = Vector2(16, 16)
+
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(3.5, 3.5)
-collision_mask = 7
+collision_mask = 3
 script = ExtResource("1_m2vl1")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
@@ -30,3 +42,41 @@ rotation = 3.14159
 shape = SubResource("RectangleShape2D_2h0nh")
 one_way_collision = true
 one_way_collision_margin = 2.0
+
+[node name="InteractionHitbox" type="Area2D" parent="."]
+visible = false
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHitbox"]
+shape = SubResource("RectangleShape2D_ds2y5")
+
+[node name="StunTimer" type="Timer" parent="InteractionHitbox"]
+one_shot = true
+
+[node name="SquishArea" type="Area2D" parent="."]
+visible = false
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquishArea"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_prj83")
+
+[node name="SpawnCollision" type="Area2D" parent="."]
+visible = false
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnCollision"]
+shape = SubResource("RectangleShape2D_mscpy")
+
+[node name="Health_Collision" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Health_Collision"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_cw12d")
+
+[connection signal="area_entered" from="InteractionHitbox" to="." method="_on_enemy_hitbox_area_entered"]
+[connection signal="timeout" from="InteractionHitbox/StunTimer" to="." method="_on_stun_timer_timeout"]
+[connection signal="body_entered" from="SquishArea" to="." method="_on_squish_area_entered"]
+[connection signal="area_entered" from="SpawnCollision" to="." method="_on_spawnpoint_entered"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://njf83oktdvt3"]
+
+[ext_resource type="Texture2D" uid="uid://b7ap1uhp8rvs" path="res://assets/player.png" id="1_ns5r6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q04g7"]
+size = Vector2(224, 224)
+
+[node name="SpawnPoint" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_q04g7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.239216)
+texture = ExtResource("1_ns5r6")
+flip_v = true

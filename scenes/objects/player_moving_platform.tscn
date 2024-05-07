@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfhkxn6p03awd"]
+
+[ext_resource type="PackedScene" uid="uid://bwoemufj1qtu" path="res://scenes/objects/moving_platform.tscn" id="1_f1338"]
+[ext_resource type="Script" path="res://PlayerDetect.gd" id="2_ofxrr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ofjch"]
+resource_local_to_scene = true
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkh3j"]
+resource_local_to_scene = true
+size = Vector2(112, 245)
+
+[node name="PlayerMovingPlatform" instance=ExtResource("1_f1338")]
+anim_to_play = "move_slow"
+
+[node name="CollisionShape2D" parent="AnimatableBody2D" index="1"]
+shape = SubResource("RectangleShape2D_ofjch")
+
+[node name="PlayerDetect" type="Area2D" parent="AnimatableBody2D" index="2"]
+collision_layer = 2
+script = ExtResource("2_ofxrr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D/PlayerDetect" index="0"]
+position = Vector2(0, -150.5)
+shape = SubResource("RectangleShape2D_kkh3j")
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="AnimatableBody2D/PlayerDetect" to="AnimatableBody2D/PlayerDetect" method="_on_player_hitbox_area_entered"]
+[connection signal="area_exited" from="AnimatableBody2D/PlayerDetect" to="AnimatableBody2D/PlayerDetect" method="_on_player_hitbox_area_exited"]

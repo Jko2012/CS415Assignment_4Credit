@@ -1,22 +1,81 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu71lvg8rnato"]
+[gd_scene load_steps=10 format=3 uid="uid://cu71lvg8rnato"]
 
 [ext_resource type="Script" path="res://scenes/objects/enemy.gd" id="1_3gn7n"]
-[ext_resource type="Texture2D" uid="uid://b7ap1uhp8rvs" path="res://graphics/player.png" id="1_krxp5"]
+[ext_resource type="Texture2D" uid="uid://dx8dys4haa4qc" path="res://assets/sprites/slime_green.png" id="2_7lqu5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pstoo"]
-size = Vector2(16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv4k5"]
+atlas = ExtResource("2_7lqu5")
+region = Rect2(5, 33, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pasr"]
+atlas = ExtResource("2_7lqu5")
+region = Rect2(29, 33, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8jmb"]
+atlas = ExtResource("2_7lqu5")
+region = Rect2(53, 33, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r82w5"]
+atlas = ExtResource("2_7lqu5")
+region = Rect2(77, 33, 14, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ml1rj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv4k5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pasr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8jmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r82w5")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1uni"]
+size = Vector2(14, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4d6ee"]
+size = Vector2(14, 15)
 
 [node name="Enemy" type="CharacterBody2D"]
-collision_layer = 4
-collision_mask = 3
-script = ExtResource("1_3gn7n")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
 texture_filter = 1
-rotation = -3.14159
-texture = ExtResource("1_krxp5")
+scale = Vector2(3.5, 3.5)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_3gn7n")
+distance = 8.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ml1rj")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.67798
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource("RectangleShape2D_pstoo")
+shape = SubResource("RectangleShape2D_e1uni")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(64, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.24
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_4d6ee")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_player_hitbox_area_entered"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqqp8rq4mi56q"]
 
-[ext_resource type="Texture2D" uid="uid://be6oati4nwklg" path="res://graphics/parallax_field.png" id="1_8mppe"]
+[ext_resource type="Texture2D" uid="uid://be6oati4nwklg" path="res://assets/parallax_field.png" id="1_8mppe"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_d26v6"]
 

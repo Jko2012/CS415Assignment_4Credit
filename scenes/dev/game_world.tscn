@@ -4,21 +4,26 @@
 [ext_resource type="PackedScene" uid="uid://dghe8uhvjgh8n" path="res://scenes/levels/level.tscn" id="1_w5wd0"]
 [ext_resource type="PackedScene" uid="uid://kq8isxdblnkv" path="res://scenes/player/player.tscn" id="2_dgeg3"]
 [ext_resource type="PackedScene" uid="uid://b1dih1ya42b7w" path="res://scenes/objects/shrink.tscn" id="3_4l35q"]
-[ext_resource type="PackedScene" uid="uid://cu71lvg8rnato" path="res://scenes/objects/enemy.tscn" id="5_evfj7"]
+[ext_resource type="PackedScene" uid="uid://b2jxb4rplf672" path="res://scenes/dev/health_increase.tscn" id="6_6r3m4"]
 [ext_resource type="PackedScene" uid="uid://kthq7cgi4c7" path="res://scenes/objects/jump_pu.tscn" id="6_aj8ix"]
 
 [node name="GameWorld" type="Node2D"]
 script = ExtResource("1_ok7t2")
 
 [node name="Level" parent="." instance=ExtResource("1_w5wd0")]
+metadata/_edit_lock_ = true
 
 [node name="Player1" parent="." instance=ExtResource("2_dgeg3")]
 modulate = Color(0, 0.784314, 0.72549, 1)
-position = Vector2(2634, 513)
+position = Vector2(366, -98)
+can_jump = true
+can_shrink = true
 
 [node name="Camera1" type="Camera2D" parent="Player1"]
 visible = false
 enabled = false
+limit_bottom = 4171
+limit_smoothed = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.3
@@ -30,18 +35,26 @@ editor_draw_drag_margin = true
 
 [node name="Player2" parent="." instance=ExtResource("2_dgeg3")]
 modulate = Color(1, 0.466667, 0.729412, 1)
-position = Vector2(902, -224)
+position = Vector2(567, -95.9999)
 player_id = 2
+can_jump = true
+can_shrink = true
 
 [node name="Shrink_PU" parent="." instance=ExtResource("3_4l35q")]
-position = Vector2(-1920, 234)
-
-[node name="Enemy" parent="." instance=ExtResource("5_evfj7")]
-position = Vector2(-325, -310)
-scale = Vector2(3.5, 3.5)
+position = Vector2(-3109, -3554)
 
 [node name="Jump_PU" parent="." instance=ExtResource("6_aj8ix")]
-position = Vector2(4134, 3826)
+position = Vector2(4158, 3855)
+scale = Vector2(2, 2)
+
+[node name="HealthIncrease1" parent="." instance=ExtResource("6_6r3m4")]
+position = Vector2(0, 574)
+
+[node name="HealthIncrease" parent="." instance=ExtResource("6_6r3m4")]
+position = Vector2(-1973, 3774)
+
+[node name="HealthIncrease2" parent="." instance=ExtResource("6_6r3m4")]
+position = Vector2(4928, -401)
 
 [connection signal="body_entered" from="Shrink_PU" to="." method="_on_shrink_body_entered"]
 [connection signal="body_entered" from="Jump_PU" to="." method="_on_jump_pu_body_entered"]

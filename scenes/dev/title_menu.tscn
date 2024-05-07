@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bns8fds7g7dbp"]
 
-[ext_resource type="FontFile" uid="uid://cv30cys1gopik" path="res://graphics/Monocraft.ttf" id="1_dlck0"]
+[ext_resource type="FontFile" uid="uid://cv30cys1gopik" path="res://assets/Monocraft.ttf" id="1_dlck0"]
 [ext_resource type="Script" path="res://scenes/dev/1PlayerStart.gd" id="2_y2dgd"]
 
 [sub_resource type="Theme" id="Theme_mmill"]

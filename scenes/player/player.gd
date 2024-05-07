@@ -5,7 +5,7 @@ const BASE_JUMP = -1000
 const BASE_GRAVITY = 40
 
 const SMALL_SPEED = 300
-const SMALL_JUMP = -1000
+const SMALL_JUMP = -1100
 const SMALL_GRAVITY = 40
 
 @export_range(1, 2) var player_id: int = 1
@@ -21,6 +21,11 @@ var move_right
 var move_up
 var move_down
 var is_shrunk
+var can_move
+var friction
+var can_grow = false
+var facing = 0
+var spawnpoint = Vector2(400, -80)
 
 func _ready():
 	speed = BASE_SPEED
@@ -31,12 +36,16 @@ func _ready():
 	move_up = "move_up_player" + str(player_id)
 	move_down = "move_down_player" + str(player_id)
 	is_shrunk = false
+	can_move = true
+	friction = 0.3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	
-	if (!flight):
-		movement()
+	if !flight:
+		velocity.y += gravity
+		if can_move:
+			movement()
 	else:
 		if Input.is_action_just_pressed("scroll_up"):
 			speed += 50
@@ -47,12 +56,14 @@ func _process(_delta):
 		velocity = direction * speed
 		
 	move_and_slide()
-	velocity.x = lerp(velocity.x, 0.0, 0.3)
+	velocity.x = lerp(velocity.x, 0.0, friction)
 
 func movement():
 	if Input.is_action_pressed(move_right):
+		facing = 1
 		velocity.x = speed
 	if Input.is_action_pressed(move_left):
+		facing = -1
 		velocity.x = -speed
 	if Input.is_action_just_pressed(move_up) and is_on_floor() and can_jump:
 		velocity.y = jumpforce
@@ -62,7 +73,9 @@ func movement():
 		else:
 			shrink_player()
 	
-	velocity.y += gravity
+
+func respawn():
+	position = spawnpoint
 
 
 func shrink_player():
@@ -84,3 +97,27 @@ func collect_shrink():
 
 func collect_jump():
 	can_jump = true
+
+
+func _on_enemy_hitbox_area_entered(_area):
+	can_move = false
+	Global.lose_health(self, player_id)
+	friction = 0.1
+	velocity.x = facing*speed*-2
+	velocity.y = -500
+	move_and_slide()
+	$InteractionHitbox/StunTimer.start()
+
+
+func _on_stun_timer_timeout():
+	can_move = true
+	friction = 0.3
+
+
+func _on_squish_area_entered(_body):
+	Global.player_death(self, player_id)
+
+
+func _on_spawnpoint_entered(area):
+	spawnpoint = area.global_position
+	
