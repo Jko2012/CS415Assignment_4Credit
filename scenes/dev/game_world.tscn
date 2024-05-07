@@ -20,8 +20,6 @@ metadata/_edit_lock_ = true
 [node name="Player1" parent="." instance=ExtResource("2_dgeg3")]
 modulate = Color(0, 0.784314, 0.72549, 1)
 position = Vector2(425, -90.0001)
-can_jump = true
-can_shrink = true
 
 [node name="Camera1" type="Camera2D" parent="Player1"]
 visible = false
